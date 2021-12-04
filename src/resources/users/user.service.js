@@ -2,11 +2,14 @@ const usersRepo = require('./user.memory.repository');
 const User = require('./user.model');
 
 const getUsers = async () => usersRepo.getUsers();
+
 const createUser = async (userData) => {
-  const user = new User(...userData);
-  return usersRepo.createUser(user);
+  const createdUser = new User(...userData);
+  return usersRepo.createUser(createdUser);
 };
+
 const getUser = async (id) => usersRepo.getUser(id);
+
 const updateUser = async (id, userData) => {
   const user = await usersRepo.getUser(id);
   if (!user) {
@@ -15,6 +18,7 @@ const updateUser = async (id, userData) => {
   const updatedUser = { ...user, ...userData };
   return usersRepo.updateUser(updatedUser);
 };
+
 const deleteUser = async (id) => usersRepo.deleteUser(id);
 
 module.exports = {
