@@ -12,9 +12,11 @@ const getUser = async (id) => USERS.find((user) => user.id === id);
 const updateUser = async (user) => {
   const index = USERS.indexOf(user);
   USERS[index] = user;
+  return user;
 };
 
 const deleteUser = async (id) => {
+  console.log(id);
   const user = await getUser(id);
   const index = USERS.indexOf(user);
   USERS.splice(index, 1);

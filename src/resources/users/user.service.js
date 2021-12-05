@@ -4,7 +4,7 @@ const User = require('./user.model');
 const getUsers = async () => usersRepo.getUsers();
 
 const createUser = async (userData) => {
-  const createdUser = new User(...userData);
+  const createdUser = new User({ ...userData });
   return usersRepo.createUser(createdUser);
 };
 

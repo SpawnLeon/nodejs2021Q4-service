@@ -10,26 +10,31 @@ router.route('/').get(async (req, res) => {
 router.route('/').post(async (req, res) => {
   const user = req.body;
   const createdUser = await usersService.createUser(user);
-  res.json(createdUser.toResponse());
+  res.status(201).json(User.toResponse(createdUser));
 });
 
 router.route('/:id').get(async (req, res) => {
   const { id } = req.params;
   const user = await usersService.getUser(id, id);
-  res.json(user.toResponse());
+  res.json(User.toResponse(user));
 });
 
 router.route('/:id').put(async (req, res) => {
   const { id } = req.params;
   const user = req.body;
   const updatedUser = await usersService.updateUser(id, user);
-  res.json(updatedUser.toResponse());
+
+  if (!updatedUser) {
+    res.status(404).json({ message: 'User not found' });
+  }
+
+  res.json(User.toResponse(updatedUser));
 });
 
-router.route('/').delete(async (req, res) => {
+router.route('/:id').delete(async (req, res) => {
   const { id } = req.params;
   await usersService.deleteUser(id);
-  res.status(201);
+  res.status(204);
   res.json({});
 });
 
