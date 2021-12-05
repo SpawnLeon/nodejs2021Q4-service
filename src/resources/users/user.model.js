@@ -1,15 +1,16 @@
-const uuid = require('uuid');
+const crypto = require('crypto');
 
 class User {
   constructor({
-    id = uuid(),
+    id = crypto.randomUUID(),
     name = 'USER',
     login = 'user',
-    password = 'P@55w0rd'
+    password = 'P@55w0rd',
   } = {}) {
     this.id = id;
     this.name = name;
     this.login = login;
+
     this.password = password;
   }
 
