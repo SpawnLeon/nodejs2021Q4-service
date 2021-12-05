@@ -10,14 +10,7 @@ const createBoard = async (boardData) => {
 
 const getBoard = async (id) => boardsRepo.getBoard(id);
 
-const updateBoard = async (id, userData) => {
-  const user = await boardsRepo.getBoard(id);
-  if (!user) {
-    return null;
-  }
-  const updatedBoard = { ...user, ...userData };
-  return boardsRepo.updateBoard(updatedBoard);
-};
+const updateBoard = async (id, board) => boardsRepo.updateBoard(id, board);
 
 const deleteBoard = async (id) => boardsRepo.deleteBoard(id);
 

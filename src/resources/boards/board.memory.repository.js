@@ -9,10 +9,18 @@ const createBoard = async (board) => {
 
 const getBoard = async (id) => BOARDS.find((board) => board.id === id);
 
-const updateBoard = async (board) => {
-  const index = BOARDS.indexOf(board);
-  BOARDS[index] = board;
-  return board;
+const updateBoard = async (id, boardData) => {
+  const board = await getBoard(id);
+
+  if (!board) {
+    return null;
+  }
+
+  const updatedBoard = { ...board, ...boardData };
+  const idx = BOARDS.findIndex((b) => b.id === id);
+  BOARDS[idx] = updatedBoard;
+
+  return updatedBoard;
 };
 
 const deleteBoard = async (id) => {

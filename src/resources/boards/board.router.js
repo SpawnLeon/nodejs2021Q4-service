@@ -10,7 +10,6 @@ router.route('/').get(async (req, res) => {
 router.route('/').post(async (req, res) => {
   const board = req.body;
   const createdBoard = await boardsService.createBoard(board);
-  console.log(createdBoard);
   res.status(201).json(Board.toResponse(createdBoard));
 });
 

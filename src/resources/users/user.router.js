@@ -15,7 +15,7 @@ router.route('/').post(async (req, res) => {
 
 router.route('/:id').get(async (req, res) => {
   const { id } = req.params;
-  const user = await usersService.getUser(id, id);
+  const user = await usersService.getUser(id);
   res.json(User.toResponse(user));
 });
 

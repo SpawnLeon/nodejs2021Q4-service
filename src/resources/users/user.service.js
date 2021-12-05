@@ -10,14 +10,7 @@ const createUser = async (userData) => {
 
 const getUser = async (id) => usersRepo.getUser(id);
 
-const updateUser = async (id, userData) => {
-  const user = await usersRepo.getUser(id);
-  if (!user) {
-    return null;
-  }
-  const updatedUser = { ...user, ...userData };
-  return usersRepo.updateUser(updatedUser);
-};
+const updateUser = async (id, userData) => usersRepo.updateUser(id, userData);
 
 const deleteUser = async (id) => usersRepo.deleteUser(id);
 
