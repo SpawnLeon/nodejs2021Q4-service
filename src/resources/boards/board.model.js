@@ -3,8 +3,8 @@ const crypto = require('crypto');
 class Board {
   constructor({
     id = crypto.randomUUID(),
-    title = 'USER',
-    column = 'user',
+    title = '',
+    column = [],
 
   } = {}) {
     this.id = id;

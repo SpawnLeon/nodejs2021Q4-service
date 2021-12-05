@@ -10,7 +10,8 @@ router.route('/').get(async (req, res) => {
 router.route('/').post(async (req, res) => {
   const board = req.body;
   const createdBoard = await boardsService.createBoard(board);
-  res.json(createdBoard.toResponse());
+  console.log(createdBoard);
+  res.status(201).json(Board.toResponse(createdBoard));
 });
 
 router.route('/:id').get(async (req, res) => {
@@ -23,10 +24,15 @@ router.route('/:id').put(async (req, res) => {
   const { id } = req.params;
   const board = req.body;
   const updatedBoard = await boardsService.updateBoard(id, board);
-  res.json(updatedBoard.toResponse(updatedBoard));
+
+  if (!updatedBoard) {
+    res.status(404).json({ message: 'Board not found' });
+  }
+
+  res.json(Board.toResponse(updatedBoard));
 });
 
-router.route('/').delete(async (req, res) => {
+router.route('/:id').delete(async (req, res) => {
   const { id } = req.params;
   await boardsService.deleteBoard(id);
   res.status(201);
