@@ -16,6 +16,12 @@ router.route('/').post(async (req, res) => {
 router.route('/:id').get(async (req, res) => {
   const { id } = req.params;
   const user = await usersService.getUser(id);
+
+  if (!user) {
+    res.status(404).json({ message: 'User not found' });
+    return;
+  }
+
   res.json(User.toResponse(user));
 });
 
@@ -33,9 +39,12 @@ router.route('/:id').put(async (req, res) => {
 
 router.route('/:id').delete(async (req, res) => {
   const { id } = req.params;
-  await usersService.deleteUser(id);
-  res.status(204);
-  res.json({});
+  const deletedUser = await usersService.deleteUser(id);
+  if (!deletedUser) {
+    res.status(404).json({ message: 'User not found' });
+    return;
+  }
+  res.status(204).send();
 });
 
 module.exports = router;

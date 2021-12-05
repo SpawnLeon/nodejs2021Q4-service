@@ -1,22 +1,21 @@
 const router = require('express').Router();
-const Board = require('./board.model');
 const boardsService = require('./board.service.js');
 
 router.route('/').get(async (req, res) => {
   const boards = await boardsService.getBoards();
-  res.json(boards.map(Board.toResponse));
+  res.json(boards);
 });
 
 router.route('/').post(async (req, res) => {
   const board = req.body;
   const createdBoard = await boardsService.createBoard(board);
-  res.status(201).json(Board.toResponse(createdBoard));
+  res.status(201).json(createdBoard);
 });
 
 router.route('/:id').get(async (req, res) => {
   const { id } = req.params;
   const board = await boardsService.getBoard(id);
-  res.json(Board.toResponse(board));
+  res.json(board);
 });
 
 router.route('/:id').put(async (req, res) => {
@@ -26,9 +25,10 @@ router.route('/:id').put(async (req, res) => {
 
   if (!updatedBoard) {
     res.status(404).json({ message: 'Board not found' });
+    return;
   }
 
-  res.json(Board.toResponse(updatedBoard));
+  res.json(updatedBoard);
 });
 
 router.route('/:id').delete(async (req, res) => {

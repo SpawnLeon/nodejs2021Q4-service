@@ -7,7 +7,7 @@ const createUser = async (user) => {
   return user;
 };
 
-const getUser = async (id) => USERS.find((user) => user.id === id);
+const getUser = async (id) => USERS.find((u) => u.id === id);
 
 const updateUser = async (id, userData) => {
   const user = await getUser(id);
@@ -25,9 +25,13 @@ const updateUser = async (id, userData) => {
 };
 
 const deleteUser = async (id) => {
-  const user = await getUser(id);
-  const index = USERS.indexOf(user);
-  USERS.splice(index, 1);
+  const idx = USERS.findIndex((u) => u.id === id);
+  if (idx === -1) {
+    return null;
+  }
+  const deletedUser = USERS[idx];
+  USERS.splice(idx, 1);
+  return deletedUser;
 };
 
 module.exports = {

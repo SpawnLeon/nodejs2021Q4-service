@@ -16,6 +16,16 @@ const updateTask = async (taskId, boardId, taskData) => tasksRepo
 
 const deleteTask = async (taskId, boardId) => tasksRepo.deleteTask(taskId, boardId);
 
+const deleteUserFromTask = async (userId) => tasksRepo.deleteUserFromTask(userId);
+
+const deleteTaskByBoard = async (boardId) => tasksRepo.deleteTaskByBoard(boardId);
+
 module.exports = {
-  getTasksByBoard, createTask, getTask, updateTask, deleteTask,
+  getTasksByBoard,
+  createTask,
+  getTask,
+  updateTask,
+  deleteTask,
+  deleteUserFromTask,
+  deleteTaskByBoard,
 };
