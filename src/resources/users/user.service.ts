@@ -1,6 +1,6 @@
-const usersRepo = require('./user.memory.repository');
-const taskService = require('../tasks/task.service.js');
-const User = require('./user.model');
+const usersRepo = require('./user.memory.repository.ts');
+const taskService = require('../tasks/task.service.ts');
+const User = require('./user.model.ts');
 
 const getUsers = async () => usersRepo.getUsers();
 

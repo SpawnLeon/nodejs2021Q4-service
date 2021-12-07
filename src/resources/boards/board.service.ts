@@ -1,6 +1,6 @@
-const boardsRepo = require('./board.memory.repository.js');
+const boardsRepo = require('./board.memory.repository.ts');
 const tasksService = require('../tasks/task.service.js');
-const Board = require('./board.model.js');
+const Board = require('./board.model.ts');
 
 const getBoards = async () => boardsRepo.getBoards();
 
